@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "Template"
+version = "0.0.1"
+description = "Description"
+authors = ["Daniel Sullivan <daniel.sullivan@state.mn.us>"]
+license = "LGPL-3.0-or-later"
+repository = "https://github.com/ds-mpca/"
+documentation = "https://ds-mpca.github.io/"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+black = { version = "^20", allow-prereleases = true }
+Sphinx = "^3.5"
+sphinx-rtd-theme = "^0.5"
+
+[tool.poetry.extras]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+)
+'''
