@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Template"
+name = "template"
 version = "0.0.1"
 description = "Description"
 authors = ["Daniel Sullivan <daniel.sullivan@state.mn.us>"]
