@@ -29,7 +29,7 @@ jobs:
           poetry-version: 1.1.4
       - name: Install
         run: |
-          poetry install -E geo
+          poetry install
       - name: Build docs
         run: |
           poetry run make -C docs html
