@@ -9,7 +9,6 @@ Welcome to PostPanda Helper's documentation!
 .. toctree::
    :maxdepth: 2
 
-   modules
 
 
 
