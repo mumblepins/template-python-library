@@ -37,6 +37,10 @@ jobs:
         with:
           name: DocumentationHTML
           path: docs/build/html/
+      - name: echo event
+        run: |
+          echo  ${{ github.event_name }}
+          echo  ${{ github.refs }}
       - name: Commit documentation changes
         if: ${{ github.event_name != 'pull_request' && github.refs == 'refs/heads/main' }}
         run: |
