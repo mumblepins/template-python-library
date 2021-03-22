@@ -37,10 +37,6 @@ jobs:
         with:
           name: DocumentationHTML
           path: docs/build/html/
-      - name: echo event
-        run: |
-          echo  ${{ github.event_name }}
-          echo  ${{ github.ref }}
       - name: Commit documentation changes
         if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
         run: |
@@ -54,7 +50,7 @@ jobs:
           # The above command will fail if no changes were present, so we ignore
           # the return code.
       - name: Push changes
-        if: ${{ github.event_name != 'pull_request' && github.refs == 'refs/heads/main' }}
+        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
         uses: ad-m/github-push-action@master
         with:
           branch: gh-pages
