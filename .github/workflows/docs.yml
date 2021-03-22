@@ -40,9 +40,9 @@ jobs:
       - name: echo event
         run: |
           echo  ${{ github.event_name }}
-          echo  ${{ github.refs }}
+          echo  ${{ github.ref }}
       - name: Commit documentation changes
-        if: ${{ github.event_name != 'pull_request' && github.refs == 'refs/heads/main' }}
+        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
         run: |
           git clone $GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git --branch gh-pages --single-branch gh-pages
           cp -r docs/build/html/* gh-pages/
