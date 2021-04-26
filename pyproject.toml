@@ -12,7 +12,7 @@ readme = "README.md"
 python = "^3.8"
 
 [tool.poetry.dev-dependencies]
-black = { version = "^20", allow-prereleases = true }
+black = { version = "^21", allow-prereleases = true }
 Sphinx = "^3.5"
 sphinx-rtd-theme = "^0.5"
 
