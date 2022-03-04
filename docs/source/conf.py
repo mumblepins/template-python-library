@@ -13,13 +13,14 @@
 #
 import os
 import sys
+from datetime import datetime
 
 sys.path.insert(0, os.path.abspath("../../module"))
 
 # -- Project information -----------------------------------------------------
 
 project = "Python Template"
-copyright = "2021, Daniel Sullivan"
+copyright = f"{datetime.now().year}, Daniel Sullivan"
 author = "Daniel Sullivan"
 
 # The full version, including alpha/beta/rc tags
