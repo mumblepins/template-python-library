@@ -2,7 +2,7 @@
 name = "template"
 version = "0.0.1"
 description = "Description"
-authors = ["Daniel Sullivan <>"]
+authors = ["Daniel Sullivan <mumblepins@users.noreply.github.com>"]
 license = "LGPL-3.0-or-later"
 repository = "https://github.com/mumblepins/python-template-repo/"
 documentation = ""
