@@ -2,7 +2,7 @@ exclude: ^(buildspec.yml|.pre-commit-config.yaml)$
 fail_fast: true
 repos:
   - repo: https://github.com/mumblepins/pre-commit-poetry
-    rev: v0.0.1
+    rev: v0.0.3
     hooks:
       - id: pre_commit_poetry
   - repo: https://github.com/pre-commit/mirrors-isort
