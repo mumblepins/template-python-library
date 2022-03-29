@@ -6,29 +6,15 @@ end_of_line = lf
 indent_size = 4
 indent_style = space
 insert_final_newline = false
-max_line_length = 100
+max_line_length = 160
 tab_width = 4
 ij_continuation_indent_size = 8
 ij_formatter_off_tag = @formatter:off
 ij_formatter_on_tag = @formatter:on
-ij_formatter_tags_enabled = false
+ij_formatter_tags_enabled = true
 ij_smart_tabs = false
-ij_visual_guides = 80,100
+ij_visual_guides = 80,120
 ij_wrap_on_typing = false
-
-[{*.markdown,*.md}]
-ij_visual_guides = none
-ij_markdown_force_one_space_after_blockquote_symbol = true
-ij_markdown_force_one_space_after_header_symbol = true
-ij_markdown_force_one_space_after_list_bullet = true
-ij_markdown_force_one_space_between_words = true
-ij_markdown_keep_indents_on_empty_lines = false
-ij_markdown_max_lines_around_block_elements = 1
-ij_markdown_max_lines_around_header = 1
-ij_markdown_max_lines_between_paragraphs = 1
-ij_markdown_min_lines_around_block_elements = 1
-ij_markdown_min_lines_around_header = 1
-ij_markdown_min_lines_between_paragraphs = 1
 
 [{*.py,*.pyw}]
 ij_visual_guides = none
@@ -43,6 +29,9 @@ ij_python_blank_lines_around_class = 1
 ij_python_blank_lines_around_method = 1
 ij_python_blank_lines_around_top_level_classes_functions = 2
 ij_python_blank_lines_before_first_method = 0
+ij_python_call_parameters_new_line_after_left_paren = false
+ij_python_call_parameters_right_paren_on_new_line = false
+ij_python_call_parameters_wrap = normal
 ij_python_dict_alignment = 0
 ij_python_dict_new_line_after_left_brace = false
 ij_python_dict_new_line_before_right_brace = false
@@ -57,6 +46,9 @@ ij_python_keep_blank_lines_in_code = 1
 ij_python_keep_blank_lines_in_declarations = 1
 ij_python_keep_indents_on_empty_lines = false
 ij_python_keep_line_breaks = true
+ij_python_method_parameters_new_line_after_left_paren = false
+ij_python_method_parameters_right_paren_on_new_line = false
+ij_python_method_parameters_wrap = normal
 ij_python_new_line_after_colon = false
 ij_python_new_line_after_colon_multi_clause = true
 ij_python_optimize_imports_always_split_from_imports = false
@@ -94,9 +86,10 @@ ij_python_spaces_within_method_call_parentheses = false
 ij_python_spaces_within_method_parentheses = false
 ij_python_use_continuation_indent_for_arguments = false
 ij_python_use_continuation_indent_for_collection_and_comprehensions = false
+ij_python_use_continuation_indent_for_parameters = true
 ij_python_wrap_long_lines = false
 
-[{*.toml,Cargo.lock,Gopkg.lock,Pipfile}]
+[{*.toml,Cargo.lock,Cargo.toml.orig,Gopkg.lock,Pipfile,poetry.lock}]
 ij_visual_guides = none
 ij_toml_keep_indents_on_empty_lines = false
 
