@@ -1,4 +1,4 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.abspath("../../module"))
 # -- Project information -----------------------------------------------------
 
 project = "Python Template"
-copyright = f"{datetime.now().year}, Daniel Sullivan"
+copyright = f"{datetime.now().year}, Daniel Sullivan"  # noqa: pylint: disable=redefined-builtin
 author = "Daniel Sullivan"
 
 # The full version, including alpha/beta/rc tags
