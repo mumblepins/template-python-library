@@ -1,18 +1,10 @@
 exclude: ^(buildspec.yml|.pre-commit-config.yaml)$
 fail_fast: true
 repos:
-#  - repo: local
-#    hooks:
-#      - id: check-poetry-lock
-#        files: "^pyproject.toml"
-#        name: check-poetry-lock
-#        #        entry: printenv
-#        entry: poetry
-#        args:
-#          - lock
-#          - --check
-#        pass_filenames: false
-#        language: system
+  - repo: https://github.com/mumblepins/pre-commit-poetry
+    rev: v0.0.1
+    hooks:
+      - id: pre_commit_poetry
   - repo: https://github.com/pre-commit/mirrors-isort
     rev: v5.10.1
     hooks:
@@ -70,15 +62,6 @@ repos:
     hooks:
       - id: bandit
         files: "^src/"
-  - repo: local
-    hooks:
-      - id: export_reqs
-        files: "^pyproject.toml"
-        name: export_reqs
-        #        entry: printenv
-        entry: ./.export_reqs.py
-        pass_filenames: false
-        language: system
   - repo: https://github.com/domdfcoding/flake2lint
     rev: v0.4.1
     hooks:
