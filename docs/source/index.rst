@@ -6,6 +6,16 @@ Welcome to Python Template's documentation!
 
 .. toctree::
    :maxdepth: 2
+   :caption: Contents:
+
+   modules
+
+
+Readme
+======
+
+.. include:: ../../README.md
+   :parser: myst_parser.sphinx_
 
 
 
