@@ -10,7 +10,7 @@ readme = "README.md"
 packages = [{ include = "python_template_repo", from="src" }]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -23,12 +23,19 @@ sphinx-rtd-theme = "^1.0"
 mypy = "^0.942"
 pytest-cov = "^3.0.0"
 pylint-pytest = "^1.1.2"
+pytest-xdist = "^2.5.0"
+myst-parser = "^0.18.0"
 
 [tool.poetry.extras]
 
 [build-system]
-requires = ["poetry-core>=1.1.0a7"]
+requires = ["poetry-core>=1.1.0b2"]
 build-backend = "poetry.core.masonry.api"
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "DEBUG"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
 
 [tool.isort]
 profile = "black"
@@ -36,16 +43,15 @@ skip_gitignore = true
 line_length = 88
 indent = "    "
 multi_line_output = 3
-default_section = "FIRSTPARTY"
 skip = "env"
 include_trailing_comma = true
 combine_as_imports = true
-force_grid_wrap = 0
+force_grid_wrap = 3
 
 [tool.black]
-line-length = 160
+line-length = 120
 include = '\.pyi?$'
-target-version = ['py39']
+target-version = ['py38', 'py39', 'py310']
 exclude = '''
 /(
       \.eggs         # exclude a few common directories in the

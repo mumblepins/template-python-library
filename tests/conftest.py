@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 import shutil
-from importlib.resources import files
+import sys
 
 import pytest
+
+if sys.version_info >= (3, 9):
+    from importlib.resources import files
+else:
+    from importlib_resources import files
 
 
 @pytest.fixture
