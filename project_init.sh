@@ -26,5 +26,6 @@ find . -iname '*'"$TO_REPLACE_UNDER"'*' \
 
 #git init
 poetry update
+poetry install --sync
 poetry run pre-commit install
 poetry run pre-commit autoupdate
