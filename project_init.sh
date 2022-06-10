@@ -11,14 +11,14 @@ grep -lr --exclude='project_init.sh' --exclude-dir='.git' "$TO_REPLACE_DASH" . \
     | xargs -I{} sed -i 's|'"$TO_REPLACE_DASH"'|'"$project_name_dash"'|g' {}
 find . -iname '*'"$TO_REPLACE_DASH"'*' \
     | tee >(cat 1>&2) \
-    | sed -E 's|(.*/)+(.+)\.(.+)$|\1\2.\3 \1'"$project_name_dash"'.\3|' \
+    | sed -E 's|(.*/?)+('"$TO_REPLACE_DASH"')(.*)$|\1\2\3 \1'"$project_name_dash"'\3|' \
     | xargs -r -n2 mv $1 $2
 grep -lr --exclude='project_init.sh' --exclude-dir='.git' "$TO_REPLACE_UNDER" . \
     | tee >(cat 1>&2) \
     | xargs -I{} sed -i 's|'"$TO_REPLACE_UNDER"'|'"$project_name_under"'|g' {}
 find . -iname '*'"$TO_REPLACE_UNDER"'*' \
     | tee >(cat 1>&2) \
-    | sed -E 's|(.*/)+(.+)\.(.+)$|\1\2.\3 \1'"$project_name_under"'.\3|' \
+    | sed -E 's|(.*/?)+('"$TO_REPLACE_UNDER"')(.*)$|\1\2\3 \1'"$project_name_under"'\3|' \
     | xargs -r -n2 mv $1 $2
 #grep -lr --exclude='project_init.sh' 'AUTHOR_NAME_AND_EMAIL' . \
 #  | xargs -I{} \
