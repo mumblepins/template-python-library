@@ -1,3 +1,4 @@
+# region Poetry
 [tool.poetry]
 name = "python-template-repo"
 version = "0.0.1"
@@ -14,32 +15,66 @@ python = "^3.8"
 
 
 [tool.poetry.group.dev.dependencies]
+# region pre-commit hooks and linting
 pylint = "^2.13.0"
 pytest = "^7.1.1"
-coverage = "^6.3.2"
+coverage = { version = "^6.3.2", extras = ['toml'] }
 pre-commit = "^2.15.0"
 Sphinx = "^4.4"
 sphinx-rtd-theme = "^1.0"
-mypy = "^0.942"
 pytest-cov = "^3.0.0"
+gitchangelog = { version = "^3.0" }
 pylint-pytest = "^1.1.2"
 pytest-xdist = "^2.5.0"
 myst-parser = "^0.18.0"
-
+# endregion
 importlib-resources = { version = "^5.7.1", python = "<3.9" }
 bump2version = "^1.0.1"
+pystache = "^0.6.0"
 
 [tool.poetry.extras]
 
 [build-system]
 requires = ["poetry-core>=1.1.0b2"]
 build-backend = "poetry.core.masonry.api"
+# endregion
+
 [tool.pytest.ini_options]
 log_cli = true
 log_cli_level = "DEBUG"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
 
+# region Mypy
+[tool.mypy]
+files = 'src/**/*.py'
+exclude = '''(?x)(
+      \.eggs
+    | \.git          # root of the project
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | \.cache
+  | env
+  | venv
+  | \.aws-sam
+  | _build
+  | buck-out
+  | build
+  | dist
+  | package_
+)'''
+#plugins = ["pydantic.mypy"]
+overrides = [
+    { module = 'awacs.*', ignore_missing_imports = true },
+    { module = 'inflection.*', ignore_missing_imports = true },
+    { module = 'troposphere.*', ignore_missing_imports = true },
+    { module = 'pystache.*', ignore_missing_imports = true },
+]
+#endregion
+
+# region ISort
 [tool.isort]
 profile = "black"
 skip_gitignore = true
@@ -49,8 +84,11 @@ multi_line_output = 3
 skip = "env"
 include_trailing_comma = true
 combine_as_imports = true
-force_grid_wrap = 3
+force_grid_wrap = 0
+known_first_party = ["python_template_repo"]
+# endregion
 
+# region Black
 [tool.black]
 line-length = 120
 include = '\.pyi?$'
@@ -73,25 +111,33 @@ exclude = '''
   | dist
 )/
 '''
+# endregion
 
+# region DepChecker
+[tool.dep_checker.name_mapping]
+gitpython = "git"
+python-dateutil = "dateutil"
+python-dotenv = "dotenv"
+#endregion
 
+#region Coverage
+[tool.coverage.run]
+branch = true
+omit = ["*/contract/suite/*"]
 
-[tool.mypy]
-files = 'src/**/*.py'
-exclude = '''(?x)(
-      \.eggs
-    | \.git          # root of the project
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | \.cache
-  | env
-  | venv
-  | \.aws-sam
-  | _build
-  | buck-out
-  | build
-  | dist
-  | package_
-)'''
+[tool.coverage.report]
+show_missing = true
+fail_under = 90
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "if .*? == .DEBUG.",
+    "if .*? == .INFO.",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:"
+]
+#endregion
