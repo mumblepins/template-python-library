@@ -29,6 +29,8 @@
 
 ### Other
 
+  * [2022-10-06](47681f5a149d6c57214c4bb6f7c3031ec0b6e0a9) – Chore: pre-commit updates.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
   * [2022-10-06](425e4d35351064f00f848c559253302eb7ad6498) – Repo cleanup, integrated some other changes.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
   * [2022-10-06](788345bac847a92ad20c148138905a206495a23e) – Renamed repo.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
