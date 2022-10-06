@@ -3,7 +3,7 @@
 name = "template-python-library"
 version = "0.0.1"
 description = "Description"
-authors = ["Daniel Sullivan <mumblepins@users.noreply.github.com>"]
+authors = ["AUTHOR_NAME_AND_EMAIL"]
 license = "LGPL-3.0-or-later"
 repository = "https://github.com/mumblepins/template-python-library/"
 documentation = "https://mumblepins.github.io/template-python-library/"
@@ -19,7 +19,6 @@ python = "^3.8"
 pylint = "^2.13.0"
 pytest = "^7.1.1"
 coverage = { version = "^6.3.2", extras = ['toml'] }
-pre-commit = "^2.15.0"
 Sphinx = "^4.4"
 sphinx-rtd-theme = "^1.0"
 pytest-cov = "^3.0.0"
@@ -47,7 +46,7 @@ log_cli_date_format = "%Y-%m-%d %H:%M:%S"
 
 # region Mypy
 [tool.mypy]
-files = 'src/**/*.py'
+files = '*.py,src/**/*.py'
 exclude = '''(?x)(
       \.eggs
     | \.git          # root of the project
@@ -79,9 +78,9 @@ overrides = [
 profile = "black"
 skip_gitignore = true
 line_length = 88
-indent = "    "
+indent = '    '
 multi_line_output = 3
-skip = "env"
+skip = 'env'
 include_trailing_comma = true
 combine_as_imports = true
 force_grid_wrap = 0

@@ -3,7 +3,7 @@ fail_fast: false
 default_install_hook_types: [ pre-commit, post-commit ]
 repos:
   - repo: https://github.com/python-poetry/poetry
-    rev: 1.2.0rc1
+    rev: 1.2.0
     hooks:
       - id: poetry-lock
         args: [ "--check" ]
@@ -88,6 +88,10 @@ repos:
         files: '^(src/.*|[^/]*)\.py$'
         additional_dependencies:
           - types-requests
+          - pydantic
+          - html2text
+          - boto3-stubs
+          - pytest-stub
   - repo: local
     hooks:
       - id: pylint
@@ -111,7 +115,6 @@ repos:
         entry: >
           poetry run
           pytest
-          -n 4
           "tests/"
           --verbose
           --cov=template_python_library
