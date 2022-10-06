@@ -1,4 +1,4 @@
-# Python Template Repo
+# Template Python Library
 
 [![Checks][checks-shield]][checks-url]
 [![Codecov][codecov-shield]][codecov-url]

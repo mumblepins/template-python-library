@@ -13,7 +13,6 @@ packages = [{ include = "template_python_library", from="src" }]
 [tool.poetry.dependencies]
 python = "^3.8"
 
-
 [tool.poetry.group.dev.dependencies]
 # region pre-commit hooks and linting
 pylint = "^2.13.0"

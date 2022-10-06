@@ -3,26 +3,40 @@ prun() {
     poetry run "$@"
 }
 
-TO_REPLACE_UNDER=template_python_library
-TO_REPLACE_DASH=template-python-library
-read -rp 'Enter new project name: ' project_name_dash
-project_name_under=$(echo "$project_name_dash" | tr '-' '_')
+to_title_case() {
+    echo "$@" | sed -E 's|[_ -]+| |g;s|\b.|\u&|g'
+}
 
-echo "Renaming to $project_name_under / $project_name_dash"
-grep -lr --exclude='project_init.sh' --exclude-dir='.git' "$TO_REPLACE_DASH" . \
-    | tee >(cat 1>&2) \
-    | xargs -I{} sed -i 's|'"$TO_REPLACE_DASH"'|'"$project_name_dash"'|g' {}
-find . -iname '*'"$TO_REPLACE_DASH"'*' \
-    | tee >(cat 1>&2) \
-    | sed -E 's|(.*/?)+('"$TO_REPLACE_DASH"')(.*)$|\1\2\3 \1'"$project_name_dash"'\3|' \
-    | xargs -r -n2 mv $1 $2
-grep -lr --exclude='project_init.sh' --exclude-dir='.git' "$TO_REPLACE_UNDER" . \
-    | tee >(cat 1>&2) \
-    | xargs -I{} sed -i 's|'"$TO_REPLACE_UNDER"'|'"$project_name_under"'|g' {}
-find . -iname '*'"$TO_REPLACE_UNDER"'*' \
-    | tee >(cat 1>&2) \
-    | sed -E 's|(.*/?)+('"$TO_REPLACE_UNDER"')(.*)$|\1\2\3 \1'"$project_name_under"'\3|' \
-    | xargs -r -n2 mv $1 $2
+to_kebab_case() {
+    echo "$@" | sed -E 's|[_ -]+|-|g;s|.*|\L&|g'
+}
+
+to_snake_case() {
+    echo "$@" | sed -E 's|[_ -]+|_|g;s|.*|\L&|g'
+}
+
+TO_REPLACE_UNDER=template_python_library
+
+to_replace=( "$TO_REPLACE_UNDER" "$(to_kebab_case $TO_REPLACE_UNDER)" "$(to_title_case $TO_REPLACE_UNDER)" )
+
+read -rp 'Enter new project name: ' project_name
+new_names=( "$(to_snake_case "$project_name")" "$(to_kebab_case "$project_name")" "$(to_title_case "$project_name")" )
+
+
+for i in "${!to_replace[@]}"; do
+    old_name="${to_replace[i]}"
+    new_name="${new_names[i]}"
+    echo "Renaming \"$old_name\" to \"$new_name\""
+
+    grep -lr --exclude='project_init.sh' --exclude-dir='.git' "$old_name" . \
+        | tee >(cat 1>&2) \
+        | xargs -I{} sed -i 's|'"$old_name"'|'"$new_name"'|g' {}
+    find . -iname '*'"$old_name"'*' \
+        | tee >(cat 1>&2) \
+        | sed -E 's|(.*/?)+('"$old_name"')(.*)$|\1\2\3 \1'"$new_name"'\3|' \
+        | xargs -r -n2 mv $1 $2
+done
+
 grep -lr --exclude='project_init.sh' 'AUTHOR_NAME_AND_EMAIL' . \
     | xargs -I{} \
         sed -i 's|AUTHOR_NAME_AND_EMAIL|'"$(git config user.name) <$(git config user.email)>"'|g' {}
