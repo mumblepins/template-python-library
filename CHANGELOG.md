@@ -29,6 +29,8 @@
 
 ### Other
 
+  * [2022-10-06](b60ae2e2e0b5ce5dadb27648f6aa4876e53a3bed) – Chore: dependency fixes.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
   * [2022-10-06](47681f5a149d6c57214c4bb6f7c3031ec0b6e0a9) – Chore: pre-commit updates.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
   * [2022-10-06](425e4d35351064f00f848c559253302eb7ad6498) – Repo cleanup, integrated some other changes.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
