@@ -5,6 +5,8 @@
 
 ### Changes
 
+  * [2022-10-06](053b0804e8ae870e4692edbccafcfe5fefdbc396) – Project_init.sh cleanup.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
   * [2022-08-24](ff902eff55ebf80d19708fbe54fa6c8df5d3e6d2) – Version upgrades, pre-commit enhancement, various cleanups.  <small>([Daniel Sullivan](mailto:mumblepins@users.noreply.github.com))</small>
 
   * [2022-06-09](a644aa527ea0028766cce6d799ec229d5f7ff06f) – Updates, improved docs and hooks.  <small>([Daniel Sullivan](mailto:mumblepins@users.noreply.github.com))</small>
