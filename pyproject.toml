@@ -1,14 +1,14 @@
 # region Poetry
 [tool.poetry]
-name = "python-template-repo"
+name = "template-python-library"
 version = "0.0.1"
 description = "Description"
 authors = ["Daniel Sullivan <mumblepins@users.noreply.github.com>"]
 license = "LGPL-3.0-or-later"
-repository = "https://github.com/mumblepins/python-template-repo/"
-documentation = "https://mumblepins.github.io/python-template-repo/"
+repository = "https://github.com/mumblepins/template-python-library/"
+documentation = "https://mumblepins.github.io/template-python-library/"
 readme = "README.md"
-packages = [{ include = "python_template_repo", from="src" }]
+packages = [{ include = "template_python_library", from="src" }]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -85,7 +85,7 @@ skip = "env"
 include_trailing_comma = true
 combine_as_imports = true
 force_grid_wrap = 0
-known_first_party = ["python_template_repo"]
+known_first_party = ["template_python_library"]
 # endregion
 
 # region Black

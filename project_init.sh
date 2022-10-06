@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-TO_REPLACE_UNDER=python_template_repo
-TO_REPLACE_DASH=python-template-repo
+TO_REPLACE_UNDER=template_python_library
+TO_REPLACE_DASH=template-python-library
 read -rp 'Enter new project name: ' project_name_dash
 project_name_under=$(echo "$project_name_dash" | tr '-' '_')
 
