@@ -78,7 +78,7 @@ repos:
         args:
           - --req-file
           - pyproject.toml
-          - src/python_template_repo
+          - src/template_python_library
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: 'v0.971'
     hooks:
@@ -114,8 +114,8 @@ repos:
           -n 4
           "tests/"
           --verbose
-          --cov=python_template_repo
-          --pyargs "python_template_repo"
+          --cov=template_python_library
+          --pyargs "template_python_library"
         language: system
         pass_filenames: false
         always_run: true
