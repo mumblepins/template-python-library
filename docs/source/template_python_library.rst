@@ -7,7 +7,7 @@ Submodules
 python\_template\_repo.app module
 ---------------------------------
 
-.. automodule:: python_template_repo.app
+.. automodule:: template_python_library.app
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ python\_template\_repo.app module
 Module contents
 ---------------
 
-.. automodule:: python_template_repo
+.. automodule:: template_python_library
    :members:
    :undoc-members:
    :show-inheritance:

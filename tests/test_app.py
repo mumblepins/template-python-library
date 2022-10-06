@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from python_template_repo.app import main
+from template_python_library.app import main
 
 
 def test_main():
