@@ -29,6 +29,8 @@
 
 ### Other
 
+  * [2022-10-06](94f5301020d2f91bf46643d24dea5402c7040b50) – Docs: changed icon.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
   * [2022-10-06](1b065b4ed9aebec09c2d61c0235037adf8d154c0) – Docs: changed theme.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
   * [2022-10-06](b60ae2e2e0b5ce5dadb27648f6aa4876e53a3bed) – Chore: dependency fixes.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
