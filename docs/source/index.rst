@@ -1,7 +1,7 @@
 ..
     coding=utf-8
 
-Welcome to Python Template's documentation!
+Welcome to Template Python Library's documentation!
 ============================================
 
 .. toctree::
