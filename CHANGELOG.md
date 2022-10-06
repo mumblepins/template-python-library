@@ -5,6 +5,8 @@
 
 ### Changes
 
+  * [2022-08-24](ff902eff55ebf80d19708fbe54fa6c8df5d3e6d2) – Version upgrades, pre-commit enhancement, various cleanups.  <small>([Daniel Sullivan](mailto:mumblepins@users.noreply.github.com))</small>
+
   * [2022-06-09](a644aa527ea0028766cce6d799ec229d5f7ff06f) – Updates, improved docs and hooks.  <small>([Daniel Sullivan](mailto:mumblepins@users.noreply.github.com))</small>
 
   * [2022-03-29](d8082cc6abe6b231301c8b798a99e7951fec9863) – Use pre-commit-poetry.  <small>([Daniel Sullivan](mailto:mumblepins@users.noreply.github.com))</small>
