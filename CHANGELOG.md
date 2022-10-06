@@ -27,6 +27,8 @@
 
 ### Other
 
+  * [2022-10-06](425e4d35351064f00f848c559253302eb7ad6498) – Repo cleanup, integrated some other changes.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
   * [2022-10-06](788345bac847a92ad20c148138905a206495a23e) – Renamed repo.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
   * [2022-10-06](a46db1df8182078da6b85868f202280e8377609e) – Chore: .gitignore.  <small>([Daniel Sullivan](mailto:mumblepins@users.noreply.github.com))</small>
