@@ -29,6 +29,8 @@
 
 ### Other
 
+  * [2022-10-06](1c78693795e8a43698d766a61489b39a8465d550) – Chore: changed license.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
   * [2022-10-06](46ac9eb97970e5370567ca53d79c982104ae888b) – Docs: update title.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
   * [2022-10-06](94f5301020d2f91bf46643d24dea5402c7040b50) – Docs: changed icon.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
