@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-set -e
 GIT_STATUS="$(git status --porcelain | xargs)"
 if [ "$GIT_STATUS" != "M CHANGELOG.md" ]; then
+    echo "$GIT_STATUS"
     echo "Please commit or stash your changes before running this script."
     exit 1
 fi
 git add .
-bumpversion --config-file ".config/.bumpversion.cfg" "$@"
+bumpversion --config-file ".config/.bumpversion.cfg" "$@" || exit 3
 TAG_NAME="$(git tag -l --format '%(refname:strip=2)' --sort=creatordate | tail -n1)"
 #TAG_CUR_HASH="$(git tag -l  --format '%(objectname)' --sort=creatordate |tail -n1)"
 TAG_MESSAGE="$(git tag -l --format '%(contents:subject)' --sort=creatordate | tail -n1)"

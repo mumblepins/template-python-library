@@ -1,11 +1,11 @@
-python\_template\_repo package
-==============================
+template\_python\_library package
+=================================
 
 Submodules
 ----------
 
-python\_template\_repo.app module
----------------------------------
+template\_python\_library.app module
+------------------------------------
 
 .. automodule:: template_python_library.app
    :members:
