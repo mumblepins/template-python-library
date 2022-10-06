@@ -29,6 +29,8 @@
 
 ### Other
 
+  * [2022-10-06](1b065b4ed9aebec09c2d61c0235037adf8d154c0) – Docs: changed theme.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
   * [2022-10-06](b60ae2e2e0b5ce5dadb27648f6aa4876e53a3bed) – Chore: dependency fixes.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
   * [2022-10-06](47681f5a149d6c57214c4bb6f7c3031ec0b6e0a9) – Chore: pre-commit updates.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
