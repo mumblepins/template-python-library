@@ -1,4 +1,4 @@
-name:  Python Publish
+name: Python Publish
 
 on: [ push, pull_request ]
 
