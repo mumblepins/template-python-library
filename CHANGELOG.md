@@ -1,7 +1,7 @@
 # Changelog
 
 
-## (unreleased)
+## v0.0.2 (2023-01-06)
 
 ### Changes
 
@@ -30,6 +30,8 @@
   * [2022-03-04](27494e8f3e4ecba320a686b8ab0faadadddd509c) – Project_init.sh.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
 ### Other
+
+  * [2023-01-06](3acf1bc65438483691618602db4522ed10c6982b) – Chore: update dependencies, pre-commit versions.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
   * [2022-10-06](1c78693795e8a43698d766a61489b39a8465d550) – Chore: changed license.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
