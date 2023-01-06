@@ -1,7 +1,7 @@
 # region Poetry
 [tool.poetry]
 name = "template-python-library"
-version = "0.0.1"
+version = "0.0.2"
 description = "Description"
 authors = ["AUTHOR_NAME_AND_EMAIL"]
 license = "MIT"
