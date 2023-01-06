@@ -38,11 +38,13 @@ requires = ["poetry-core>=1.1.0b2"]
 build-backend = "poetry.core.masonry.api"
 # endregion
 
+# region pytest
 [tool.pytest.ini_options]
 log_cli = true
 log_cli_level = "DEBUG"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+#endregion
 
 # region Mypy
 [tool.mypy]

@@ -2,7 +2,7 @@
     coding=utf-8
 
 Welcome to Template Python Library's documentation!
-============================================
+===================================================
 
 .. toctree::
    :maxdepth: 2
