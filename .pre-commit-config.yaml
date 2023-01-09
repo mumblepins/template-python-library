@@ -82,7 +82,7 @@ repos:
     hooks:
       - id: flake2lint
   - repo: https://github.com/mumblepins/dep_checker
-    rev: v0.7.0
+    rev: v0.7.1
     hooks:
       - id: dep_checker
         args:
