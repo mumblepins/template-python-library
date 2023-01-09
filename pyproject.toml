@@ -8,7 +8,7 @@ license = "MIT"
 repository = "https://github.com/mumblepins/template-python-library/"
 documentation = "https://mumblepins.github.io/template-python-library/"
 readme = "README.md"
-packages = [{ include = "template_python_library", from="src" }]
+packages = [{ include = "template_python_library", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -142,3 +142,11 @@ exclude_lines = [
     "if __name__ == .__main__.:"
 ]
 #endregion
+
+# region Bandit
+[tool.bandit]
+skips = [
+    #    "B410", "B320"   # LXML XML attacks
+]
+
+# endregion

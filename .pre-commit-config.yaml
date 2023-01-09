@@ -67,6 +67,16 @@ repos:
     hooks:
       - id: bandit
         files: "^src/"
+        additional_dependencies:
+          - toml
+        args:
+          - -c
+          - pyproject.toml
+          - -f
+          - custom
+          - -q
+          - --msg-template
+          - "{abspath}:{line}: {test_id}: Severe-{severity}/Conf-{confidence}: {msg}"
   - repo: https://github.com/domdfcoding/flake2lint
     rev: v0.4.2
     hooks:
@@ -83,7 +93,6 @@ repos:
     rev: 'v0.991'
     hooks:
       - id: mypy
-#        pass_filenames: false
         args: [ '--config-file', 'pyproject.toml' ]
         files: '^(src/.*|[^/]*)\.py$'
         additional_dependencies:
