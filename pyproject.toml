@@ -15,21 +15,21 @@ python = "^3.8"
 
 [tool.poetry.group.dev.dependencies]
 # region pre-commit hooks and linting
-pylint = "^2.13.0"
-pytest = "^7.1.1"
-coverage = { version = "^6.3.2", extras = ['toml'] }
-Sphinx = "^4.4"
-sphinx-material = "^0.0.35"
-pytest-cov = "^3.0.0"
+pylint = "*"
+pytest = "*"
+coverage = {extras = ["toml"], version = "*"}
+Sphinx = "*"
+sphinx-immaterial = "*"
+pytest-cov = "*"
 gitchangelog = { version = "^3.0" }
 pylint-pytest = "^1.1.2"
 pytest-xdist = "^2.5.0"
-myst-parser = "^0.18.0"
+myst-parser = "*"
+bump2version = "^1.0.1"
+pystache = "*"
+toml = "*"
 # endregion
 importlib-resources = { version = "^5.7.1", python = "<3.9" }
-bump2version = "^1.0.1"
-pystache = "^0.6.0"
-toml = "^0.10.2"
 
 [tool.poetry.extras]
 
