@@ -1,6 +1,13 @@
 # Changelog
 
 
+## (unreleased)
+
+### Other
+
+  * [2023-01-09](91a130378a46b0453bdf944d46bedf2c33f996a4) – Chore: changed bandit pre-commit config, some formatting updates.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
+
 ## v0.0.2 (2023-01-06)
 
 ### Changes

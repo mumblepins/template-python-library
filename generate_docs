@@ -2,5 +2,6 @@
 
 poetry run sphinx-apidoc -o docs/source/ src -f -T
 pushd docs || exit
+rm -rf build
 poetry run make html
 popd || exit
