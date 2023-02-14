@@ -17,7 +17,7 @@ python = "^3.8"
 # region pre-commit hooks and linting
 pylint = "*"
 pytest = "*"
-coverage = {extras = ["toml"], version = "*"}
+coverage = { extras = ["toml"], version = "*" }
 Sphinx = "*"
 sphinx-immaterial = "*"
 pytest-cov = "*"
@@ -91,7 +91,7 @@ known_first_party = ["template_python_library"]
 
 # region Black
 [tool.black]
-line-length = 120
+line-length = 100
 include = '\.pyi?$'
 target-version = ['py38', 'py39', 'py310']
 exclude = '''
@@ -150,3 +150,7 @@ skips = [
 ]
 
 # endregion
+
+
+[tool.nitpick]
+style = ["https://raw.githubusercontent.com/mumblepins/style-repo/main/nitpick-python.toml"]
