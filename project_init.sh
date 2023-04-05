@@ -17,11 +17,10 @@ to_snake_case() {
 
 TO_REPLACE_UNDER=template_python_library
 
-to_replace=( "$TO_REPLACE_UNDER" "$(to_kebab_case $TO_REPLACE_UNDER)" "$(to_title_case $TO_REPLACE_UNDER)" )
+to_replace=("$TO_REPLACE_UNDER" "$(to_kebab_case $TO_REPLACE_UNDER)" "$(to_title_case $TO_REPLACE_UNDER)")
 
 read -rp 'Enter new project name: ' project_name
-new_names=( "$(to_snake_case "$project_name")" "$(to_kebab_case "$project_name")" "$(to_title_case "$project_name")" )
-
+new_names=("$(to_snake_case "$project_name")" "$(to_kebab_case "$project_name")" "$(to_title_case "$project_name")")
 
 for i in "${!to_replace[@]}"; do
     old_name="${to_replace[i]}"

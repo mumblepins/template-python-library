@@ -3,6 +3,10 @@
 
 ## (unreleased)
 
+### Fix
+
+  * [2023-02-14](4e0e90420f9f4b894cf9dc662a6d86e6037b79a8) – Some version bumps, added some precommit stuff.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
 ### Other
 
   * [2023-01-09](3ebc798212470924d15ff0d3426ffd4b88687326) – Chore: update dependencies, docs html template.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>

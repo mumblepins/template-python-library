@@ -37,7 +37,7 @@ jobs:
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-${{ matrix.python-version }}
-      - run: pip install --upgrade --pre poetry
+      - run: pip install --upgrade poetry
       - uses: actions/cache@v3
         id: cache-poetry
         with:
@@ -55,8 +55,8 @@ jobs:
       - name: run tests
         run: |
           poetry run pytest "tests/" \
+          -n auto \
           --verbose  \
-          -n 4 \
           --cov=template_python_library \
           --pyargs "template_python_library" \
           --cov-report=html --cov-report=term --cov-report=xml
