@@ -1,39 +1,99 @@
-build:
-  stage: build
+image: $DOCKER_REPO/cicd/poetry:3.9
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  GIT_DEPTH: "1"
+  GIT_SUBMODULE_DEPTH: "1"
+
+.precommit-cache: &precommit-cache
+  key: precommit
+  paths:
+    - .cache/pre-commit
+  unprotect: true
+
+.base:
   variables:
-    POETRY_HTTP_BASIC_NEXUS_USERNAME: "${NEXUS_USERNAME}"
-    POETRY_HTTP_BASIC_NEXUS_PASSWORD: "${NEXUS_PASSWORD}"
-    POETRY_REPOSITORIES_NEXUS: "${NEXUS_URL}"
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
     POETRY_CACHE_DIR: "$CI_PROJECT_DIR/.cache/poetry"
     PRE_COMMIT_HOME: "$CI_PROJECT_DIR/.cache/pre-commit"
-  cache:
+  cache: &poetry_cache
+    key: poetry
     paths:
-      - ".cache"
-    key: python-default-$CI_PROJECT_ROOT_NAMESPACE
-    untracked: true
-    when: always
-
+      - .cache/pip
+      - .cache/poetry
+    unprotect: true
+    policy: pull
+  tags:
+    - arm64
   before_script:
-    - ln -s "$(command -v python3)" /usr/local/bin/python || true
     - python -VV
-    - echo -e "\e[0Ksection_start:`date +%s`:install_pip[collapsed=true]\r\e[0KInstall Pip Packages"
-    - pip install poetry pre-commit
-    - echo -e "\e[0Ksection_end:`date +%s`:install_pip\r\e[0K"
-    - echo -e "\e[0Ksection_start:`date +%s`:install_poetry[collapsed=true]\r\e[0KInstall Poetry Packages"
+    - poetry -V
     - poetry install --sync
-    - echo -e "\e[0Ksection_end:`date +%s`:install_poetry\r\e[0K"
+
+setup-deps:
+  extends: .base
+  stage: .pre
+  cache:
+    policy: pull-push
   script:
-    - echo -e "\e[0Ksection_start:`date +%s`:run_pre_commit[collapsed=true]\r\e[0KPre-Commit Linting and Testing"
+    - echo "deps done"
+
+pre_commit:
+  extends: .base
+  stage: test
+  cache:
+    - *precommit-cache
+    - *poetry_cache
+  script:
     - poetry run pre-commit run --all-files
-    - echo -e "\e[0Ksection_end:`date +%s`:run_pre_commit\r\e[0K"
+
+test:
+  extends: .base
+  stage: test
+  rules:
+    - if: $CI_COMMIT_BRANCH
+      changes:
+        - pyproject.toml
+        - poetry.lock
+        - src/**/*
+        - tests/**/*
+  script:
+    - poetry run pytest "tests/"
+      -n 4
+      --dist worksteal
+      --reruns 3
+      --verbose
+      --cov=template_python_library
+      --pyargs "template_python_library"
+      --cov-report=html --cov-report=term --cov-report=xml
+      --junitxml=junit.xml
+  coverage: '/Total coverage: \d+\.\d+%/'
+  artifacts:
+    paths:
+      - htmlcov
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+      junit: junit.xml
+
+build:
+  extends: .base
+  stage: deploy
+  script:
     - poetry build
-    - if [[ "$CI_COMMIT_TAG" != "" ]]; then
-      poetry config repositories.nexus "${POETRY_REPOSITORIES_NEXUS}" ;
-      poetry publish -r nexus --skip-existing ;
-      else
-      echo "Not tagged release; not uploading" ;
-      fi
+  rules:
+    - if: $CI_COMMIT_BRANCH
   artifacts:
     paths:
       - dist
+
+publish:
+  extends: .base
+  stage: deploy
+  script:
+    - rm -rf dist
+    - poetry build
+    - pip install twine
+    - twine upload dist/*.*
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+/

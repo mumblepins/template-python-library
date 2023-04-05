@@ -34,18 +34,18 @@ importlib-resources = { version = "^5.7.1", python = "<3.9" }
 [tool.poetry.extras]
 
 [build-system]
-requires = ["poetry-core>=1.1.0b2"]
+requires = ["poetry-core>=1.2.0"]
 build-backend = "poetry.core.masonry.api"
-# endregion
 
+# endregion
 # region pytest
 [tool.pytest.ini_options]
 log_cli = true
 log_cli_level = "DEBUG"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
-#endregion
 
+#endregion
 # region Mypy
 [tool.mypy]
 files = '*.py,src/**/*.py'
@@ -112,15 +112,15 @@ exclude = '''
   | dist
 )/
 '''
-# endregion
 
+# endregion
 # region DepChecker
 [tool.dep_checker.name_mapping]
 gitpython = "git"
 python-dateutil = "dateutil"
 python-dotenv = "dotenv"
-#endregion
 
+#endregion
 #region Coverage
 [tool.coverage.run]
 branch = true
@@ -141,16 +141,15 @@ exclude_lines = [
     "if 0:",
     "if __name__ == .__main__.:"
 ]
-#endregion
 
+#endregion
 # region Bandit
 [tool.bandit]
-skips = [
-    #    "B410", "B320"   # LXML XML attacks
-]
+skips = []
+
+[tool.bandit.assert_used]
+skips = ['*_test.py', '*test_*.py']
 
 # endregion
-
-
 [tool.nitpick]
 style = ["https://raw.githubusercontent.com/mumblepins/style-repo/main/nitpick-python.toml"]

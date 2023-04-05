@@ -2,23 +2,24 @@ fail_fast: true
 default_install_hook_types: [pre-commit, post-commit]
 repos:
   - repo: https://github.com/andreoliwa/nitpick
-    rev: "v0.32.0"
+    rev: "v0.33.1"
     hooks:
       - id: nitpick
   - repo: https://github.com/python-poetry/poetry
-    rev: 1.3.0
+    rev: 1.4.0
     hooks:
       - id: poetry-lock
         args: ["--check"]
         files: "(pyproject.toml|poetry.lock)"
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: "v2.7.1"
+    rev: "v3.0.0-alpha.6"
     hooks:
       - id: prettier
         stages:
           - commit
         additional_dependencies:
+          - prettier
           - prettier-plugin-toml
           - "@prettier/plugin-xml"
           - prettier-plugin-sh
@@ -28,7 +29,7 @@ repos:
     hooks:
       - id: isort
   - repo: https://github.com/ambv/black
-    rev: 23.1.0
+    rev: 23.3.0
     hooks:
       - id: black
         language_version: python3
@@ -78,12 +79,11 @@ repos:
       - id: python-check-mock-methods
       - id: python-no-log-warn
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.7.4
+    rev: 1.7.5
     hooks:
       - id: bandit
-        files: "^src/"
         additional_dependencies:
-          - toml
+          - bandit[toml]
         args:
           - -c
           - pyproject.toml
@@ -105,7 +105,7 @@ repos:
           - pyproject.toml
           - src/template_python_library
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.0.0"
+    rev: "v1.1.1"
     hooks:
       - id: mypy
         args: ["--config-file", "pyproject.toml"]
@@ -125,12 +125,7 @@ repos:
           pylint
         language: system
         types: [python]
-        args: [
-            "-rn", # Only display messages
-            "-sn", # Don't display the score
-            "--extension-pkg-whitelist=pydantic",
-            "--rcfile=.config/.pylintrc",
-          ]
+        args: ["-rn", "-sn", "--extension-pkg-whitelist=pydantic", "--rcfile=.config/.pylintrc"]
       - id: pytest-local
         name: pytest-local
         description: Run pytest in the local virtualenv
@@ -154,5 +149,6 @@ repos:
         always_run: true
         pass_filenames: false
         name: Generate changelog
-        entry: poetry run bash -c "GITCHANGELOG_CONFIG_FILENAME='.config/.gitchangelog.rc' gitchangelog > CHANGELOG.md"
+        entry: poetry run bash -c "GITCHANGELOG_CONFIG_FILENAME='.config/.gitchangelog.rc'
+          gitchangelog > CHANGELOG.md"
         stages: [post-commit]
