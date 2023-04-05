@@ -102,8 +102,10 @@ repos:
       - id: dep_checker
         args:
           - --req-file
-          - pyproject.toml
-          - src/template_python_library
+          - ../pyproject.toml
+          - -d
+          - src
+          - template_python_library
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: "v1.1.1"
     hooks:
