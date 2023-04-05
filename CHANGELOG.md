@@ -13,6 +13,8 @@
 
 ### Other
 
+  * [2023-04-05](31480b14cb10a50e89e3c1b9eefb500f8408f11e) – Ci: changes to pipeline.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
   * [2023-01-09](3ebc798212470924d15ff0d3426ffd4b88687326) – Chore: update dependencies, docs html template.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
   * [2023-01-09](91a130378a46b0453bdf944d46bedf2c33f996a4) – Chore: changed bandit pre-commit config, some formatting updates.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
