@@ -126,7 +126,7 @@ python-dotenv = "dotenv"
 #region Coverage
 [tool.coverage.run]
 branch = true
-omit = ["*/contract/suite/*"]
+omit = ["*/contract/suite/*", "tests/*"]
 
 [tool.coverage.report]
 show_missing = true

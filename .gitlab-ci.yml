@@ -57,13 +57,12 @@ test:
         - src/**/*
         - tests/**/*
   script:
-    - poetry run pytest "tests/"
+    - poetry run pytest
       -n 4
       --dist worksteal
       --reruns 3
       --verbose
-      --cov=template_python_library
-      --pyargs "template_python_library"
+      --cov
       --cov-report=html --cov-report=term --cov-report=xml
       --junitxml=junit.xml
   coverage: '/Total coverage: \d+\.\d+%/'
