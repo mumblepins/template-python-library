@@ -5,6 +5,8 @@
 
 ### Fix
 
+  * [2023-04-05](963d917a70fdb63acc6d03562c6f65eb8d32342e) – Update coverage pytest stuff.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
   * [2023-04-05](03295f526d11b0df5f5ea2081c9813ccd261de03) – Test dependencies.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
   * [2023-04-05](c1240eea9a9fb4537258f5e11cacc474d61873b4) – Gitlab ci changes, version bumps various other things.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
