@@ -468,3 +468,4 @@ src/requirements.txt
 /.idea/rSettings.xml
 /src/requirements.txt
 /.idea/jupyter-settings.xml
+/junit.xml

@@ -5,6 +5,8 @@
 
 ### Fix
 
+  * [2023-04-05](c1240eea9a9fb4537258f5e11cacc474d61873b4) – Gitlab ci changes, version bumps various other things.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
   * [2023-02-14](4e0e90420f9f4b894cf9dc662a6d86e6037b79a8) – Some version bumps, added some precommit stuff.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
 ### Other
