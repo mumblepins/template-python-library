@@ -80,9 +80,8 @@ build:
   extends: .base
   stage: deploy
   script:
+    - rm -rf dist
     - poetry build
-  rules:
-    - if: $CI_COMMIT_BRANCH
   artifacts:
     paths:
       - dist
@@ -90,9 +89,10 @@ build:
 publish:
   extends: .base
   stage: deploy
+  needs:
+    - job: build
+      artifacts: true
   script:
-    - rm -rf dist
-    - poetry build
     - pip install twine
     - twine upload dist/*.*
   rules:
