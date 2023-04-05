@@ -56,6 +56,8 @@ test:
         - poetry.lock
         - src/**/*
         - tests/**/*
+      exists:
+        - tests
   script:
     - poetry run pytest
       -n 4
