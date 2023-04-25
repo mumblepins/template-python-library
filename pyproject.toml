@@ -30,9 +30,8 @@ myst-parser = "*"
 bump2version = "*"
 pystache = "*"
 toml = "*"
-# endregion
-importlib-resources = { version = ">=5.7.1", python = "<3.9" }
 
+# endregion
 [tool.poetry.extras]
 
 [build-system]
@@ -153,5 +152,23 @@ skips = []
 skips = ['*_test.py', '*test_*.py']
 
 # endregion
+# region Nitpick
 [tool.nitpick]
 style = ["https://raw.githubusercontent.com/mumblepins/style-repo/main/nitpick-python.toml"]
+
+# endregion
+# region Tox
+[tool.tox]
+# language=ini
+legacy_tox_ini = """
+[tox]
+isolated_build = true
+min_version = 4.0
+envlist = py{38,39,310,311}
+
+[testenv]
+deps = pytest
+commands = pytest tests --import-mode importlib
+
+"""
+# endregion
