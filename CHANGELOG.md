@@ -17,6 +17,12 @@
 
 ### Other
 
+  * [2023-04-25](5f0eaa08051d41eaf893d647ca0100b5bbe657d7) – Chore: version updates, precommit changes.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
+  * [2023-04-05](2c42ca6fd9e94b7b461d44e2f9e47d0eb3d0c822) – Merge remote-tracking branch 'mdh-gitlab/main'  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
+  * [2023-04-05](34e5000085711624d94d8012bdfc38eab46f86aa) – Update .gitlab-ci.yml file.  <small>([SulliD2](mailto:daniel.j.sullivan@state.mn.us))</small>
+
   * [2023-04-05](31480b14cb10a50e89e3c1b9eefb500f8408f11e) – Ci: changes to pipeline.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
   * [2023-01-09](3ebc798212470924d15ff0d3426ffd4b88687326) – Chore: update dependencies, docs html template.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
