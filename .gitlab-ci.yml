@@ -35,6 +35,7 @@ setup-deps:
   cache:
     policy: pull-push
   script:
+    - pip install twine
     - echo "deps done"
 
 pre_commit:

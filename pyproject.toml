@@ -94,7 +94,7 @@ known_first_party = ["template_python_library"]
 [tool.black]
 line-length = 100
 include = '\.pyi?$'
-target-version = ['py38', 'py39', 'py310']
+target-version = ['py38', 'py39', 'py310','py311']
 exclude = '''
 /(
       \.eggs         # exclude a few common directories in the
@@ -116,8 +116,12 @@ exclude = '''
 
 # endregion
 # region DepChecker
+[tool.dep_checker]
+namespace_packages = ["ruamel.yaml", "jaraco.docker"]
+
 [tool.dep_checker.name_mapping]
-gitpython = "git"
+GitPython = "git"
+PyYAML = "yaml"
 python-dateutil = "dateutil"
 python-dotenv = "dotenv"
 
