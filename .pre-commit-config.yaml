@@ -2,11 +2,11 @@ fail_fast: true
 default_install_hook_types: [pre-commit, post-commit]
 repos:
   - repo: https://github.com/andreoliwa/nitpick
-    rev: "v0.33.1"
+    rev: "v0.33.2"
     hooks:
       - id: nitpick
   - repo: https://github.com/python-poetry/poetry
-    rev: 1.4.0
+    rev: 1.5.0
     hooks:
       - id: poetry-lock
         args: ["--check"]
@@ -65,7 +65,7 @@ repos:
       - id: python-check-mock-methods
       - id: python-no-log-warn
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.2
+    rev: v3.7.0
     hooks:
       - id: pyupgrade
         args: [--py37-plus]
@@ -97,7 +97,7 @@ repos:
           - --msg-template
           - "{abspath}:{line}: {test_id}: Severe-{severity}/Conf-{confidence}: {msg}"
   - repo: https://github.com/domdfcoding/flake2lint
-    rev: v0.4.2
+    rev: v0.4.3
     hooks:
       - id: flake2lint
   - repo: https://github.com/mumblepins/dep_checker
@@ -111,7 +111,7 @@ repos:
           - src
           - template_python_library
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.2.0"
+    rev: "v1.4.0"
     hooks:
       - id: mypy
         args: ["--config-file", "pyproject.toml"]
