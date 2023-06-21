@@ -17,6 +17,8 @@
 
 ### Other
 
+  * [2023-04-26](4ceb497950366d9fb1a32f61d4c9385a0cdf1aa8) – Chore: minor tweaks.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
+
   * [2023-04-25](5f0eaa08051d41eaf893d647ca0100b5bbe657d7) – Chore: version updates, precommit changes.  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
 
   * [2023-04-05](2c42ca6fd9e94b7b461d44e2f9e47d0eb3d0c822) – Merge remote-tracking branch 'mdh-gitlab/main'  <small>([Daniel Sullivan](mailto:daniel.j.sullivan@state.mn.us))</small>
