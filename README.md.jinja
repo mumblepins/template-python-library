@@ -1,17 +1,17 @@
-# Template Python Library
+# {{ project_name }}
 
 [![CI][ci-shield]][ci-url]
 [![Docs][docs-shield]][docs-url]
 [![Release][release-shield]][release-url]
 
-[ci-shield]: https://img.shields.io/github/actions/workflow/status/mumblepins/template-python-library/ci.yml?style=flat-square&branch=main&label=CI
-[ci-url]: https://github.com/mumblepins/template-python-library/actions/workflows/ci.yml
-[docs-shield]: https://img.shields.io/github/actions/workflow/status/mumblepins/template-python-library/docs.yml?style=flat-square&branch=main&label=Docs
-[docs-url]: https://mumblepins.github.io/template-python-library/
-[release-shield]: https://img.shields.io/github/actions/workflow/status/mumblepins/template-python-library/release.yml?style=flat-square&branch=main&label=Release
-[release-url]: https://github.com/mumblepins/template-python-library/actions/workflows/release.yml
+[ci-shield]: https://img.shields.io/github/actions/workflow/status/{{ github_org }}/{{ project_slug }}/ci.yml?style=flat-square&branch=main&label=CI
+[ci-url]: https://github.com/{{ github_org }}/{{ project_slug }}/actions/workflows/ci.yml
+[docs-shield]: https://img.shields.io/github/actions/workflow/status/{{ github_org }}/{{ project_slug }}/docs.yml?style=flat-square&branch=main&label=Docs
+[docs-url]: https://{{ github_org }}.github.io/{{ project_slug }}/
+[release-shield]: https://img.shields.io/github/actions/workflow/status/{{ github_org }}/{{ project_slug }}/release.yml?style=flat-square&branch=main&label=Release
+[release-url]: https://github.com/{{ github_org }}/{{ project_slug }}/actions/workflows/release.yml
 
-Description
+{{ description }}
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ uv tool install prek ruff pyright
 ## Installation
 
 ```bash
-uv add template-python-library
+uv add {{ project_slug }}
 ```
 
 ## Developer commands

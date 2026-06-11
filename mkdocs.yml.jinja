@@ -1,6 +1,6 @@
-site_name: Template Python Library
-site_description: Description
-site_url: https://github.com/mumblepins/template-python-library
+site_name: {{ project_name }}
+site_description: {{ description }}
+site_url: https://github.com/{{ github_org }}/{{ project_slug }}
 
 theme:
   name: material
@@ -26,8 +26,8 @@ theme:
     - search.highlight
     - content.code.copy
 
-repo_name: template-python-library
-repo_url: https://github.com/mumblepins/template-python-library
+repo_name: {{ project_slug }}
+repo_url: https://github.com/{{ github_org }}/{{ project_slug }}
 edit_uri: edit/main/docs/
 
 plugins:
