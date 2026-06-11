@@ -1,2 +1,2 @@
-def main():
+def main() -> bool:
     return True

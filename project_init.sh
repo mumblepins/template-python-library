@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-prun() {
-    poetry run "$@"
-}
 
 to_title_case() {
     echo "$@" | sed -E 's|[_ -]+| |g;s|\b.|\u&|g'
@@ -17,7 +14,7 @@ to_snake_case() {
 
 TO_REPLACE_UNDER=template_python_library
 
-to_replace=("$TO_REPLACE_UNDER" "$(to_kebab_case $TO_REPLACE_UNDER)" "$(to_title_case $TO_REPLACE_UNDER)")
+to_replace=("$TO_REPLACE_UNDER" "$(to_kebab_case "$TO_REPLACE_UNDER")" "$(to_title_case "$TO_REPLACE_UNDER")")
 
 read -rp 'Enter new project name: ' project_name
 new_names=("$(to_snake_case "$project_name")" "$(to_kebab_case "$project_name")" "$(to_title_case "$project_name")")
@@ -40,10 +37,6 @@ grep -lr --exclude='project_init.sh' 'AUTHOR_NAME_AND_EMAIL' . \
     | xargs -I{} \
         sed -i 's|AUTHOR_NAME_AND_EMAIL|'"$(git config user.name) <$(git config user.email)>"'|g' {}
 
-#git init
-# poetry update
-poetry install --sync
-prun pre-commit install --install-hooks
-
-prun pre-commit run --all-files --hook-stage manual
-prun pre-commit run -a --hook-stage post-commit
+uv sync --all-groups
+prek install
+prek run --all-files
