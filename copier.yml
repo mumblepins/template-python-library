@@ -4,7 +4,6 @@ _templates_suffix: .jinja
 
 _exclude:
   - "copier.yml"
-  - "pyproject.toml"
   - "CHANGELOG.md"
   - "README.md"
   - ".git"
