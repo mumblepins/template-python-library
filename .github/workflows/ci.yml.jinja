@@ -1,36 +1,38 @@
-{%- set all_versions = ["3.11", "3.12", "3.13", "3.14"] %}
-{%- set selected_idx = all_versions.index(python_version) %}
+{%- set all_versions = ["3.11", "3.12", "3.13", "3.14"] -%}
+{%- set selected_idx = all_versions.index(python_version) -%}
 {%- set matrix_versions = all_versions[selected_idx:] -%}
 name: CI
 
 on:
+  workflow_dispatch:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
 
-permissions:
-  contents: read
+permissions: {}
+
+concurrency:
+  group: {% raw %}${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}{% endraw %}
+  cancel-in-progress: true
 
 jobs:
-  lint-and-test:
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: {{ matrix_versions | tojson }}
-
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          enable-cache: true
+          persist-credentials: false
 
-      - name: Set up Python {% raw %}${{ matrix.python-version }}{% endraw %}
-        run: uv python install {% raw %}${{ matrix.python-version }}{% endraw %}
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
 
-      - name: Install tools
+      - name: Install prek
         run: uv tool install prek
 
       - name: Install dependencies
@@ -39,11 +41,86 @@ jobs:
       - name: Run pre-commit
         run: prek run --all-files --show-diff-on-failure
 
-      - name: Run tests
-        run: uv run pytest --verbose --cov --cov-report=html --cov-report=term --cov-report=xml --junitxml=junit.xml
+  type-check:
+    name: Type check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
+
+      - name: Install dependencies
+        run: uv sync --all-groups
 
       - name: Run mypy
         run: uv run mypy src tests
 
       - name: Run pyright
-        run: pyright
+        run: uv run pyright
+
+  test:
+    name: Test (Python {% raw %}${{ matrix.python-version }}{% endraw %})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: {{ matrix_versions | tojson }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
+
+      - name: Run tests with coverage
+        run: uv run --python={% raw %}${{ matrix.python-version }}{% endraw %} coverage run -m pytest
+
+      - name: Upload coverage data
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: coverage-{% raw %}${{ matrix.python-version }}{% endraw %}
+          path: .coverage.*
+          include-hidden-files: true
+
+  coverage:
+    name: Coverage
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
+
+      - name: Install dependencies
+        run: uv sync --all-groups
+
+      - name: Download coverage data
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          pattern: coverage-*
+          merge-multiple: true
+
+      - name: Combine coverage
+        run: uv run coverage combine
+
+      - name: Coverage report
+        run: |
+          echo '## Coverage Report' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          uv run coverage report | tee -a $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+  all-checks-pass:
+    name: All checks pass
+    if: always()
+    needs: [lint, type-check, test, coverage]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check job results
+        uses: re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe # v1.2.2
+        with:
+          jobs: {% raw %}${{ toJSON(needs) }}{% endraw %}

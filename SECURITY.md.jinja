@@ -1,0 +1,31 @@
+# Security Policy
+
+## Reporting a Vulnerability
+
+If you find a security vulnerability in {{ project_name }}, please report it through [GitHub's private vulnerability reporting](https://github.com/{{ github_org }}/{{ project_slug }}/security/advisories/new). This keeps the details private while we work on a fix.
+
+Please include:
+
+- What you found and how to reproduce it
+- Which version you're using
+- Any relevant logs or output (redact secrets)
+
+## Security Measures
+
+This project ships with security hardening out of the box:
+
+- **All GitHub Actions pinned by SHA** with version comments, not floating tags. Dependabot opens PRs for updates.
+- **Minimal workflow permissions** (`permissions: {}` at the top level, scoped per job).
+- **`persist-credentials: false`** on checkout steps to prevent token leakage.
+- **Concurrency groups** to cancel redundant workflow runs.
+- **Secret scanning** via [gitleaks](https://github.com/gitleaks/gitleaks) in pre-commit hooks.
+- **Dependency updates** via [Dependabot](https://docs.github.com/en/code-security/dependabot) on a weekly schedule.
+- **PyPI publishing** uses Trusted Publishers with OIDC and Sigstore build provenance attestation (when enabled).
+
+## Response Times
+
+This is a volunteer-maintained open source project. Security reports are taken seriously, but there are no guaranteed response times.
+
+## Supported Versions
+
+Security fixes are applied to the latest release on the `main` branch. There is no backport policy for older versions.

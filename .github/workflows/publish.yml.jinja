@@ -1,0 +1,68 @@
+# To enable PyPI publishing on version tags, change the trigger to:
+# on:
+#   push:
+#     tags:
+#       - "v*"
+#
+# You must also configure a "pypi" environment in your GitHub repository settings:
+# Settings > Environments > New environment > name it "pypi"
+# Add required reviewers and restrict deployment to v* tags.
+#
+# Finally, configure your PyPI project to trust this repository's OIDC identity:
+# https://docs.pypi.org/trusted-publishers/adding-a-publisher/
+name: Publish to PyPI
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: publish
+
+jobs:
+  build:
+    name: Build distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
+        with:
+          enable-cache: false
+
+      - name: Build
+        run: uv build
+
+      - name: Upload distribution
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    name: Publish to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      attestations: write
+    environment:
+      name: pypi
+      url: https://pypi.org/p/{{ project_slug }}
+    steps:
+      - name: Download distribution
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: dist
+          path: dist/
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be # v2.4.0
+        with:
+          subject-path: "dist/*"
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e # v1.13.0

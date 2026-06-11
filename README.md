@@ -12,9 +12,10 @@ A [Copier](https://copier.readthedocs.io/) template for bootstrapping a Python l
 | Testing | [pytest](https://docs.pytest.org/) with coverage, xdist, randomly |
 | Docs | [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) + [mkdocstrings](https://mkdocstrings.github.io/) |
 | Releases | [python-semantic-release](https://python-semantic-release.readthedocs.io/) |
-| CI/CD | GitHub Actions — CI, Docs deploy, Semantic Release |
+| CI/CD | GitHub Actions — CI (split jobs, SHA-pinned), Docs deploy, Semantic Release, PyPI publishing |
 | Secret scanning | [gitleaks](https://github.com/gitleaks/gitleaks) |
 | Dependency updates | [Dependabot](https://docs.github.com/en/code-security/dependabot) |
+| Community files | CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md |
 
 ## Prerequisites
 
@@ -91,19 +92,23 @@ my-project/
 │       └── index.md
 ├── .github/
 │   ├── workflows/
-│   │   ├── ci.yml             # lint + test across Python versions
-│   │   ├── docs.yml           # deploy MkDocs to GitHub Pages
-│   │   └── release.yml        # semantic release + GitHub release assets
+│   │   ├── ci.yml             # lint + type-check + test (matrix) + coverage + gate
+│   │   ├── docs.yml           # build + deploy MkDocs to GitHub Pages
+│   │   ├── release.yml        # semantic release + GitHub release assets
+│   │   └── publish.yml        # PyPI publishing (disabled by default)
 │   └── dependabot.yml
 ├── .copier-answers.yml        # stores your Copier answers for updates
 ├── .editorconfig
 ├── .gitignore
 ├── .pre-commit-config.yaml
 ├── .python-version
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
 ├── LICENSE                    # omitted if license = None
 ├── mkdocs.yml
 ├── pyproject.toml
-└── README.md
+├── README.md
+└── SECURITY.md
 ```
 
 ## Developer commands
@@ -123,9 +128,10 @@ Once inside a generated project, common tasks are available via [poethepoet](htt
 
 ## CI/CD workflows
 
-- **CI** — runs on push/PR to `main`: lint, format, tests, mypy, pyright across all supported Python versions
-- **Docs** — deploys MkDocs to GitHub Pages on push to `main`
-- **Release** — uses python-semantic-release to create versioned GitHub releases from conventional commits. PyPI publishing is included but commented out — uncomment the step and add a `PYPI_TOKEN` secret to enable it.
+- **CI** — runs on push/PR to `main`: split into lint, type-check, test (Python matrix), coverage, and an all-checks-pass gate. All actions pinned by SHA.
+- **Docs** — builds MkDocs and deploys to GitHub Pages via GitHub Pages Actions (separate build + deploy jobs).
+- **Release** — uses python-semantic-release to create versioned GitHub releases from conventional commits.
+- **Publish** — PyPI publishing with Trusted Publishers and Sigstore provenance attestation. Disabled by default (`workflow_dispatch` only); edit the workflow trigger to `push: tags: ["v*"]` to enable.
 
 ## Conventional commits
 

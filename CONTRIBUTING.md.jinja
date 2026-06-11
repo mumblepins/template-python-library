@@ -1,0 +1,115 @@
+# Contributing
+
+Contributions are welcome, and they are greatly appreciated! Every little bit helps, and credit will always be given.
+
+You can contribute in many ways:
+
+## Types of Contributions
+
+### Report Bugs
+
+Report bugs at https://github.com/{{ github_org }}/{{ project_slug }}/issues
+
+If you are reporting a bug, please include:
+
+- Your operating system name and version.
+- Any details about your local setup that might be helpful in troubleshooting.
+- Detailed steps to reproduce the bug.
+
+### Fix Bugs
+
+Look through the GitHub issues for bugs. Anything tagged with "bug" and "help wanted" is open to whoever wants to implement a fix for it.
+
+### Implement Features
+
+Look through the GitHub issues for features. Anything tagged with "enhancement" and "help wanted" is open to whoever wants to implement it.
+
+### Write Documentation
+
+{{ project_name }} could always use more documentation, whether as part of the official docs, in docstrings, or even on the web in blog posts, articles, and such.
+
+### Submit Feedback
+
+The best way to send feedback is to file an issue at https://github.com/{{ github_org }}/{{ project_slug }}/issues.
+
+If you are proposing a new feature:
+
+- Explain in detail how it would work.
+- Keep the scope as narrow as possible, to make it easier to implement.
+- Remember that this is a volunteer-driven project, and that contributions are welcome :)
+
+## Get Started!
+
+Ready to contribute? Here's how to set up `{{ project_slug }}` for local development.
+
+1. Fork the `{{ project_slug }}` repo on GitHub.
+2. Clone your fork locally:
+
+   ```sh
+   git clone git@github.com:your_name_here/{{ project_slug }}.git
+   ```
+
+3. Install dependencies:
+
+   ```sh
+   cd {{ project_slug }}/
+   uv sync --all-groups
+   ```
+
+4. Create a branch for local development:
+
+   ```sh
+   git checkout -b name-of-your-bugfix-or-feature
+   ```
+
+   Now you can make your changes locally.
+
+5. Run the checks to make sure your changes pass:
+
+   ```sh
+   uv run poe check
+   ```
+
+   This runs sync, pre-commit hooks, and tests. You can also run them individually:
+
+   ```sh
+   uv run poe prek    # lint and format
+   uv run poe test    # run tests with coverage
+   uv run mypy src tests   # type check with mypy
+   uv run pyright          # type check with pyright
+   ```
+
+6. Commit your changes and push your branch to GitHub:
+
+   ```sh
+   git add .
+   git commit -m "Your detailed description of your changes."
+   git push origin name-of-your-bugfix-or-feature
+   ```
+
+   Use [conventional commit](https://www.conventionalcommits.org/) messages so that semantic release can determine the version bump:
+
+   - `feat:` for new features (minor bump)
+   - `fix:` / `perf:` for fixes and performance improvements (patch bump)
+   - `docs:`, `chore:`, `ci:`, `refactor:`, `style:`, `test:` for other changes
+
+7. Submit a pull request through the GitHub website.
+
+## Pull Request Guidelines
+
+Before you submit a pull request, check that it meets these guidelines:
+
+1. The pull request should include tests if applicable.
+2. If the pull request changes the public API, update the documentation.
+3. Keep commits small and atomic. One logical change per commit.
+4. Ensure all CI checks pass (lint, type-check, tests, coverage).
+
+## Releasing
+
+Releases are automated via [python-semantic-release](https://python-semantic-release.readthedocs.io/). When changes are pushed to `main`, the Release workflow evaluates conventional commit messages and creates a new version + GitHub Release if warranted.
+
+To trigger a release manually:
+
+1. Merge your PR to `main`.
+2. The Release workflow runs automatically and creates a versioned tag + GitHub Release.
+3. To publish to PyPI, enable the Publish workflow (see `.github/workflows/publish.yml`) and configure Trusted Publishers on PyPI.

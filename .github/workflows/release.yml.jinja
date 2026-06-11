@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+concurrency:
+  group: {% raw %}${{ github.workflow }}-release-${{ github.ref_name }}{% endraw %}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Create release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: {% raw %}${{ github.ref_name }}{% endraw %}
+          fetch-depth: 0
+
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
+
+      - name: Set up Python
+        run: uv python install {{ python_version }}
+
+      - name: Force release branch to workflow sha
+        run: |
+          git reset --hard {% raw %}${{ github.sha }}{% endraw %}
+
+      - name: Python Semantic Release
+        id: release
+        uses: python-semantic-release/python-semantic-release@2773f6d901a5cefed959c6ccda302ef41fed67dc # v9.15.0
+        with:
+          github_token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+          git_committer_name: "github-actions[bot]"
+          git_committer_email: "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Publish to GitHub Release Assets
+        uses: python-semantic-release/publish-action@cce32968fdf40e8770bf4cef82d315ed58063a34 # v9.15.0
+        if: steps.release.outputs.released == 'true'
+        with:
+          github_token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+          tag: {% raw %}${{ steps.release.outputs.tag }}{% endraw %}

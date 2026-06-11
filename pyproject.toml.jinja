@@ -4,8 +4,33 @@ version = "0.0.1"
 description = "{{ description }}"
 readme = "README.md"
 authors = [{ name = "{{ author_name }}", email = "{{ author_email }}" }]
+maintainers = [{ name = "{{ author_name }}", email = "{{ author_email }}" }]
+license = { text = "{{ license }}" }
 requires-python = ">={{ python_version }}"
 dependencies = []
+classifiers = [
+    "Development Status :: 3 - Alpha",
+{% if license == "MIT" -%}
+    "License :: OSI Approved :: MIT License",
+{% elif license == "Apache-2.0" -%}
+    "License :: OSI Approved :: Apache Software License",
+{% elif license == "BSD-3-Clause" -%}
+    "License :: OSI Approved :: BSD License",
+{% elif license == "GPL-3.0" -%}
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+{% elif license == "AGPL-3.0" -%}
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+{% endif -%}
+    "Programming Language :: Python :: 3",
+    "Typing :: Typed",
+]
+
+[project.urls]
+homepage = "https://github.com/{{ github_org }}/{{ project_slug }}"
+documentation = "https://{{ github_org }}.github.io/{{ project_slug }}/"
+changelog = "https://github.com/{{ github_org }}/{{ project_slug }}/releases"
+issues = "https://github.com/{{ github_org }}/{{ project_slug }}/issues"
+source = "https://github.com/{{ github_org }}/{{ project_slug }}"
 
 [project.optional-dependencies]
 # example = ["package>=1.0"]
@@ -15,16 +40,35 @@ dependencies = []
 
 [dependency-groups]
 dev = [
+    { include-group = "lint" },
+    { include-group = "test" },
+    { include-group = "typecheck" },
+    { include-group = "docs" },
+]
+lint = [
+    "ruff",
+]
+test = [
     "pytest>=9.0",
     "pytest-cov>=7.0",
     "pytest-xdist",
     "pytest-randomly",
+    "coverage",
+]
+typecheck = [
     "mypy",
+    "pyright",
+]
+docs = [
     "mkdocs-material",
     "mkdocstrings[python]",
     "python-semantic-release",
     "poethepoet",
 ]
+
+[tool.uv]
+package = true
+default-groups = ["dev"]
 
 [build-system]
 requires = ["uv_build>=0.11.15,<0.12"]
@@ -125,6 +169,7 @@ convention = "google"
 
 # region pytest
 [tool.pytest.ini_options]
+testpaths = ["tests"]
 log_cli = true
 log_cli_level = "INFO"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
@@ -140,7 +185,13 @@ addopts = [
 # region coverage
 [tool.coverage.run]
 branch = true
+parallel = true
+source = ["src/", "tests/"]
+
 [tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 50
 exclude_also = [
     "def __repr__",
     "if self.debug:",
@@ -150,8 +201,10 @@ exclude_also = [
     "if 0:",
     "if __name__ == .__main__.:",
     "if TYPE_CHECKING:",
+    "if typing.TYPE_CHECKING:",
     "class .*\\bProtocol\\):",
     "@(abc\\.)?abstractmethod",
+    "\\.\\.\\.",
 ]
 # endregion
 
