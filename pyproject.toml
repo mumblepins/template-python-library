@@ -1,58 +1,166 @@
-# region Poetry
-[tool.poetry]
+[project]
 name = "template-python-library"
 version = "0.0.2"
 description = "Description"
-authors = ["AUTHOR_NAME_AND_EMAIL"]
-license = "MIT"
-repository = "https://github.com/mumblepins/template-python-library/"
-documentation = "https://mumblepins.github.io/template-python-library/"
 readme = "README.md"
-packages = [{ include = "template_python_library", from = "src" }]
+authors = [{ name = "AUTHOR_NAME_AND_EMAIL" }]
+requires-python = ">=3.14"
+dependencies = []
 
-[tool.poetry.dependencies]
-python = "^3.8"
+[project.optional-dependencies]
+# example = ["package>=1.0"]
 
-[tool.poetry.group.dev.dependencies]
-# region pre-commit hooks and linting
-pylint = "*"
-pytest = "*"
-coverage = { extras = ["toml"], version = "*" }
-Sphinx = "*"
-sphinx-immaterial = "*"
-pytest-cov = "*"
-gitchangelog = { version = ">=3.0" }
-pylint-pytest = "*"
-pytest-xdist = "*"
-pytest-rerunfailures = "*"
-pytest-randomly = "*"
-myst-parser = "*"
-bump2version = "*"
-pystache = "*"
-toml = "*"
+[project.scripts]
+# my-cli = "template_python_library.cli:main"
 
-# endregion
-[tool.poetry.extras]
+[dependency-groups]
+dev = [
+    "pytest>=9.0",
+    "pytest-cov>=7.0",
+    "pytest-xdist",
+    "pytest-randomly",
+    "mypy",
+    "hatchling",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "python-semantic-release",
+    "poethepoet",
+]
 
 [build-system]
-requires = ["poetry-core>=1.2.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["uv_build>=0.11.15,<0.12"]
+build-backend = "uv_build"
 
+[tool.poe.tasks]
+sync = "uv sync --upgrade --all-groups"
+test = """uv run pytest
+    --verbose
+    --cov
+    --cov-report=html --cov-report=term
+    --cov-report=xml
+    --junitxml=junit.xml"""
+prek = "prek run --all-files --show-diff-on-failure"
+build = "uv build"
+docs = "uv run mkdocs build"
+docs-serve = "uv run mkdocs serve"
+check = ["sync", "prek", "test"]
+
+# region ruff
+[tool.ruff]
+line-length = 100
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+[tool.ruff.lint]
+select = [
+    "N",
+    "UP",
+    "B",
+    "A",
+    "C4",
+    "COM",
+    "T10",
+    "E",
+    "F",
+    "I",
+    "S",
+    "W",
+    "PD",
+    "PGH",
+    "NPY",
+    "PERF",
+    "RUF",
+]
+ignore = ["COM812"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402"]
+"**/{tests,docs,tools}/*" = ["E402", "S101"]
+
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+force-wrap-aliases = true
+known-first-party = ["template_python_library"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 # endregion
+
 # region pytest
 [tool.pytest.ini_options]
 log_cli = true
-log_cli_level = "DEBUG"
+log_cli_level = "INFO"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+markers = [
+    "integration: Mark a test as an integration test.",
+]
+addopts = [
+    "--import-mode=importlib",
+]
+# endregion
 
-#endregion
+# region coverage
+[tool.coverage.run]
+branch = true
+[tool.coverage.report]
+exclude_also = [
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+# endregion
+
 # region Mypy
 [tool.mypy]
-files = '*.py,src/**/*.py'
+files = "src/**/*.py,tests/**/*.py"
 exclude = '''(?x)(
       \.eggs
-    | \.git          # root of the project
+    | \.git
   | \.hg
   | \.mypy_cache
   | \.tox
@@ -67,112 +175,49 @@ exclude = '''(?x)(
   | dist
   | package_
 )'''
-#plugins = ["pydantic.mypy"]
-overrides = [
-    { module = 'awacs.*', ignore_missing_imports = true },
-    { module = 'inflection.*', ignore_missing_imports = true },
-    { module = 'troposphere.*', ignore_missing_imports = true },
-    { module = 'pystache.*', ignore_missing_imports = true },
-]
-#endregion
-
-# region ISort
-[tool.isort]
-profile = "black"
-skip_gitignore = true
-line_length = 88
-indent = '    '
-multi_line_output = 3
-skip = 'env'
-include_trailing_comma = true
-combine_as_imports = true
-force_grid_wrap = 0
-known_first_party = ["template_python_library"]
+check_untyped_defs = true
 # endregion
 
-# region Black
-[tool.black]
-line-length = 100
-include = '\.pyi?$'
-target-version = ['py38', 'py39', 'py310','py311']
-exclude = '''
-/(
-      \.eggs         # exclude a few common directories in the
-    | \.git          # root of the project
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | \.cache
-  | env
-  | venv
-  | \.aws-sam
-  | _build
-  | buck-out
-  | build
-  | dist
-)/
-'''
-
+# region Pyright
+[tool.pyright]
+typeCheckingMode = "standard"
+include = ["src", "tests"]
+venvPath = "."
+venv = ".venv"
 # endregion
-# region DepChecker
-[tool.dep_checker]
-namespace_packages = ["ruamel.yaml", "jaraco.docker"]
 
-[tool.dep_checker.name_mapping]
-GitPython = "git"
-PyYAML = "yaml"
-python-dateutil = "dateutil"
-python-dotenv = "dotenv"
+# region Semantic Release
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+version_variables = ["src/template_python_library/__init__.py:__version__"]
+build_command = "uv build"
+commit_message = "{version}\n\nAutomatically generated by python-semantic-release"
+tag_format = "v{version}"
+allow_zero_version = true
+major_on_zero = false
 
-#endregion
-#region Coverage
-[tool.coverage.run]
-branch = true
-omit = ["*/contract/suite/*", "tests/*"]
+[tool.semantic_release.commit_parser_options]
+allowed_tags = ["build", "chore", "ci", "docs", "feat", "fix", "perf", "refactor", "style", "test"]
+minor_tags = ["feat"]
+patch_tags = ["fix", "perf"]
 
-[tool.coverage.report]
-show_missing = true
-fail_under = 90
-exclude_lines = [
-    "pragma: no cover",
-    "def __repr__",
-    "if self.debug:",
-    "if settings.DEBUG",
-    "if .*? == .DEBUG.",
-    "if .*? == .INFO.",
-    "raise AssertionError",
-    "raise NotImplementedError",
-    "if 0:",
-    "if __name__ == .__main__.:"
+[tool.semantic_release.changelog]
+mode = "update"
+exclude_commit_patterns = [
+    '''chore(?:\([^)]*?\))?: .+''',
+    '''ci(?:\([^)]*?\))?: .+''',
+    '''refactor(?:\([^)]*?\))?: .+''',
+    '''style(?:\([^)]*?\))?: .+''',
+    '''test(?:\([^)]*?\))?: .+''',
 ]
 
-#endregion
-# region Bandit
-[tool.bandit]
-skips = []
+[tool.semantic_release.changelog.default_templates]
+changelog_file = "CHANGELOG.md"
+output_format = "md"
+mask_initial_release = true
 
-[tool.bandit.assert_used]
-skips = ['*_test.py', '*test_*.py']
-
-# endregion
-# region Nitpick
-[tool.nitpick]
-style = ["https://raw.githubusercontent.com/mumblepins/style-repo/main/nitpick-python.toml"]
-
-# endregion
-# region Tox
-[tool.tox]
-# language=ini
-legacy_tox_ini = """
-[tox]
-isolated_build = true
-min_version = 4.0
-envlist = py{38,39,310,311}
-
-[testenv]
-deps = pytest
-commands = pytest tests --import-mode importlib
-
-"""
+[tool.semantic_release.branches.main]
+match = "(main|master)"
+prerelease = false
+prerelease_token = "rc"
 # endregion
