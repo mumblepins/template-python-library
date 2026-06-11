@@ -1,3 +1,6 @@
+{%- set all_versions = ["3.11", "3.12", "3.13", "3.14"] %}
+{%- set selected_idx = all_versions.index(python_version) %}
+{%- set matrix_versions = all_versions[selected_idx:] -%}
 name: CI
 
 on:
@@ -14,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.14"]
+        python-version: {{ matrix_versions | tojson }}
 
     steps:
       - uses: actions/checkout@v4
@@ -24,8 +27,8 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Set up Python ${{ matrix.python-version }}
-        run: uv python install ${{ matrix.python-version }}
+      - name: Set up Python {% raw %}${{ matrix.python-version }}{% endraw %}
+        run: uv python install {% raw %}${{ matrix.python-version }}{% endraw %}
 
       - name: Install tools
         run: uv tool install prek
