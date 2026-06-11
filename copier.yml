@@ -8,6 +8,7 @@ _exclude:
   - "CHANGELOG.md"
   - "README.md"
   - ".git"
+  - ".gitignore"
   - ".github/workflows/template-release.yml"
   - ".idea"
   - "junit.xml"
