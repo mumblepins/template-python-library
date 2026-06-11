@@ -28,14 +28,16 @@ A [Copier](https://copier.readthedocs.io/) template for bootstrapping a Python l
 ### Create a new project
 
 ```bash
-copier copy gh:mumblepins/template-python-library my-new-project
+copier copy --trust gh:mumblepins/template-python-library my-new-project
 ```
 
 Or from a local clone:
 
 ```bash
-copier copy /path/to/template-python-library my-new-project
+copier copy --trust /path/to/template-python-library my-new-project
 ```
+
+The `--trust` flag is required because this template runs post-generation tasks (git init, dependency installation, pre-commit setup).
 
 Copier will prompt for:
 
@@ -68,7 +70,7 @@ If you generated a project from this template and want to pull in template chang
 cd my-project
 uv run poe update
 # or directly:
-copier update
+copier update --trust
 ```
 
 Copier will replay your original answers and prompt for any new or changed values, then merge the diff.

@@ -4,7 +4,11 @@ _templates_suffix: .jinja
 
 _exclude:
   - "copier.yml"
+  - "pyproject.toml"
+  - "CHANGELOG.md"
+  - "README.md"
   - ".git"
+  - ".github/workflows/template-release.yml"
   - ".idea"
   - "junit.xml"
   - "__pycache__"
@@ -12,6 +16,8 @@ _exclude:
   - "*.pyc"
   - "uv.lock"
   - ".DS_Store"
+  - ".coverage"
+  - "coverage.xml"
 
 project_name:
   type: str

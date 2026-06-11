@@ -22,20 +22,21 @@ uv tool install prek ruff pyright
 ## Installation
 
 ```bash
-uv add {{ project_slug }}
+copier copy --trust gh:{{ github_org }}/{{ project_slug }} .
 ```
+
+The `--trust` flag is required because this template runs post-generation tasks (git init, dependency installation, pre-commit setup).
 
 ## Developer commands
 
 | Purpose              | Command                                       |
 | -------------------- | --------------------------------------------- |
-| Install deps         | `uv sync --upgrade --all-groups`              |
-| Poe shortcut         | `uv run sync`                                 |
-| All tests + coverage | `uv run test`                                 |
+| Install deps         | `uv run poe sync`                             |
+| All tests + coverage | `uv run poe test`                             |
 | Single test          | `uv run pytest tests/path.py::test_name -q`   |
-| Lint + format        | `prek run --all-files --show-diff-on-failure` |
+| Lint + format        | `uv run poe prek`                             |
 | Type-check (mypy)    | `uv run mypy src tests`                       |
-| Type-check (pyright) | `pyright`                                     |
-| Build docs           | `uv run docs`                                 |
-| Serve docs           | `uv run docs-serve`                           |
+| Type-check (pyright) | `uv run pyright`                              |
+| Build docs           | `uv run poe docs`                             |
+| Serve docs           | `uv run poe docs-serve`                       |
 | Full pre-flight      | `uv run poe check`                            |
