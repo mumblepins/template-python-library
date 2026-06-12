@@ -5,7 +5,6 @@ _templates_suffix: .jinja
 _exclude:
   - "copier.yml"
   - "CHANGELOG.md"
-  - "README.md"
   - ".git"
   - ".gitignore"
   - ".github/workflows/template-release.yml"
