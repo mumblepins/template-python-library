@@ -6,23 +6,13 @@ readme = "README.md"
 authors = [{ name = "{{ author_name }}", email = "{{ author_email }}" }]
 maintainers = [{ name = "{{ author_name }}", email = "{{ author_email }}" }]
 {% if license != "None" -%}
-license = { text = "{{ license }}" }
+license = "{{ license }}"
+license-files = ["LICENSE"]
 {% endif -%}
 requires-python = ">={{ python_version }}"
 dependencies = []
 classifiers = [
     "Development Status :: 3 - Alpha",
-{%- if license == "MIT" %}
-    "License :: OSI Approved :: MIT License",
-{%- elif license == "Apache-2.0" %}
-    "License :: OSI Approved :: Apache Software License",
-{%- elif license == "BSD-3-Clause" %}
-    "License :: OSI Approved :: BSD License",
-{%- elif license == "GPL-3.0" %}
-    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-{%- elif license == "AGPL-3.0" %}
-    "License :: OSI Approved :: GNU Affero General Public License v3",
-{%- endif %}
     "Programming Language :: Python :: 3",
     "Typing :: Typed",
 ]

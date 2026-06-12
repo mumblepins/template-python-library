@@ -2,6 +2,7 @@
 name = "template-python-library"
 version = "0.1.4"
 description = "Copier template for Python libraries with modern tooling"
+license = "MIT"
 requires-python = ">=3.11"
 
 [tool.semantic_release]
