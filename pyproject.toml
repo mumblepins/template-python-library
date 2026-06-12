@@ -1,6 +1,6 @@
 [project]
 name = "template-python-library"
-version = "0.1.3"
+version = "0.1.4"
 description = "Copier template for Python libraries with modern tooling"
 requires-python = ">=3.11"
 
