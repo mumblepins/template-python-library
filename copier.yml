@@ -6,7 +6,6 @@ _exclude:
   - "copier.yml"
   - "CHANGELOG.md"
   - ".git"
-  - ".gitignore"
   - ".github/workflows/template-release.yml"
   - ".idea"
   - "junit.xml"
